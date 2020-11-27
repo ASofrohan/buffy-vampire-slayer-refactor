@@ -1,48 +1,35 @@
 package org.ucm.tp1.Logic;
-import org.ucm.tp1.Logic.Lists.SlayerList;
-import org.ucm.tp1.Logic.Lists.VampireList;
+import org.ucm.tp1.Logic.Lists.GameObjectList;
 import org.ucm.tp1.Logic.GameObjects.Player;
 
 public class GameObjectBoard {
 	
 	private Player player;
-	private SlayerList slayerList;
-	private VampireList vampireList;
+	private GameObjectList objectList;
 	
 	public GameObjectBoard(Level l) {
 		//inicializar objetos
 		this.player = new Player();
-		this.slayerList = new SlayerList();
-		this.vampireList = new VampireList(l);
+		this.objectList = new GameObjectList(l);
 	}
 	
 	public boolean checkWin() {
 		boolean win = false;	
-		if(vampireList.getvRemaining() == 0 && vampireList.getvAlive() == 0) win = true;	//no v left on the board and remaining
+		if(objectList.getvRemaining() == 0 && objectList.getvAlive() == 0) win = true;	//no v left on the board and remaining
 		return win;
 	}
 	
 	public boolean checkLose() {		//vampire about to move and on the first column
 		boolean lose = false;	
-		for(int i = 0; i < vampireList.getCounter(); i++) {
-			if(vampireList.getVampireList()[i].getColumn() == 0 && vampireList.getVampireList()[i].getMove()) lose = true;
+		for(int i = 0; i < objectList.getGameObjects().size(); i++) {
+			if(objectList.getGameObjects().get(i).getColumn() == (-1)) lose = true;
 		}	
 		return lose;
 	}
 	
 	public void update(boolean addCoins){
 		if(addCoins) this.player.setCoins(this.player.getCoins()+10);		//add coins
-		
-		//move vampires if theres no slayer/vampire in front
-		for(int j = 0; j < this.vampireList.getCounter(); j++) {
-			if(!this.vampireList.checkPos(this.vampireList.getVampireList()[j].getRow(), this.vampireList.getVampireList()[j].getColumn()-1)) {
-				this.vampireList.getVampireList()[j].setMove(false);
-			}
-			if(!this.slayerList.checkPos(this.vampireList.getVampireList()[j].getRow(), this.vampireList.getVampireList()[j].getColumn()-1)) {
-				this.vampireList.getVampireList()[j].setMove(false);
-			}
-		}
-		this.vampireList.moveVampires();
+		objectList.move();		//move all
 	}
 	
 	public void attack() {

@@ -1,29 +1,31 @@
 package org.ucm.tp1.Logic.GameObjects;
 
-public class Vampire {
+public class Vampire extends GameObject{
 	private int health;
 	private int fireRate;
 	private int damage;
-	private int row;
-	private int column;
 	private boolean move;		//indica si le toca moverse ese turno o no
-	private boolean deployed;
 	
-	public Vampire(){
+	public Vampire(int row, int column){
 		this.health = 3;
         this.fireRate = 1;
         this.damage = 1;
         this.move = false;		//it changes each turn
-        this.deployed = false;
+        deploy(row, column);	
 	}
-    public void deployVampire(int row, int column) {
-    	this.row = row;
-    	this.column = column;
-    	this.deployed = true;
+
+	public boolean move() {
+		if(this.move) {
+			this.column--;
+		}
+		this.move = !this.move;
+		return !this.move;
     }
-	public void moveForward() {
-		this.column--;
-	}
+	
+    public String toString() {
+    	return "V[" + this.health + "]";
+    }
+	
 	public int getHealth() {
 		return health;
 	}
@@ -42,28 +44,10 @@ public class Vampire {
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
-	public int getRow() {
-		return row;
-	}
-	public void setRow(int row) {
-		this.row = row;
-	}
-	public int getColumn() {
-		return column;
-	}
-	public void setColumn(int column) {
-		this.column = column;
-	}
 	public boolean getMove() {
 		return move;
 	}
 	public void setMove(boolean move) {
 		this.move = move;
-	}
-	public boolean getDeployed() {
-		return deployed;
-	}
-	public void setDeployed(boolean deployed) {
-		this.deployed = deployed;
 	}
 }

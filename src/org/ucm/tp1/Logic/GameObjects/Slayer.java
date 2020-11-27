@@ -1,19 +1,16 @@
 package org.ucm.tp1.Logic.GameObjects;
 
-public class Slayer {
+public class Slayer extends GameObject{
     private static int cost;
     private int health; 
     private int fireRate;
     private int damage;
-    private int row;
-    private int column;
-	private boolean deployed;
 
-    public Slayer() {
+    public Slayer(int row, int column) {
         this.health = 3;
         this.fireRate = 1;
         this.damage = 1;
-        this.deployed = false;
+        deploy(row, column);
     }
     static {
     	cost = 50;
@@ -21,12 +18,14 @@ public class Slayer {
 
     /* TODO When new types of damage are added, such as area or diagonal,
      * create an enum with the different types. */
-    public void deploySlayer(int row, int column) {
-    	this.row = row;
-    	this.column = column;
-    	this.deployed = true;
+    
+    public boolean move() {
+    	return false;
     }
     
+    public String toString() {
+    	return "S[" + this.health + "]";
+    }
     
     public static int getCost() {
         return cost;
@@ -52,24 +51,6 @@ public class Slayer {
     public void setDamage(int damage) {
         this.damage = damage;
     }
-    public int getRow() {
-        return row;
-    }
-    public void setRow(int row) {
-        this.row = row;
-    }
-    public int getColumn() {
-        return column;
-    }
-    public void setColumn(int column) {
-        this.column = column;
-    }
-	public boolean getDeployed() {
-		return deployed;
-	}
-	public void setDeployed(boolean deployed) {
-		this.deployed = deployed;
-	}
     public static final String usageMsg = "Usage: [a]dd <x> <y>";
 
 }

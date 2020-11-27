@@ -1,8 +1,4 @@
-package utils;
-
-/*  
- * Author: Simon Pickin, 28/09/17
- */
+package org.ucm.tp1.utils;
 
 public class MyStringUtils {
 	public static String repeat(String elmnt, int length) {

@@ -56,31 +56,19 @@ public class GameObjectBoard {
 		row--;
 		column--;
 		boolean added = false;
-		if(this.slayerList.getCounter() < 30 && this.player.getCoins() >= 50 && this.slayerList.checkPos(row, column) && this.vampireList.checkPos(row, column)) {
-			this.slayerList.addSlayer(row, column);
-			this.getPlayer().setCoins(this.getPlayer().getCoins()-50);		//update coins
-			added = true;
+		if(this.player.getCoins() >= 50) {
+			added = objectList.addSlayer(row, column);
+			if(added) this.getPlayer().setCoins(this.getPlayer().getCoins()-50);		//update coins
 		}
 		return added;
 	}
 	
 	public void addVampire(double rand, int nRows, int nColumns, double frequency){
-		//calcular si añadirlo o no
-		//calcular en que fila iria
-		//añadirlo		
-		if(rand <= frequency && this.vampireList.getvRemaining() > 0) {
-			int row = (int)(Math.round(rand*100) % nRows);
-			if(this.vampireList.checkPos(row, nColumns)) {
-				this.vampireList.addVampire(row, nColumns);
-			}
-		}
+		objectList.addVampire(rand, nRows, nColumns, frequency);
 	}
 	
 	public void removeDead(){
-		//remove slayers
-		this.slayerList.removeDead();
-		//remove vampires
-		this.vampireList.removeDead();
+		objectList.removeDead();
 	}
 	
 	String searchPos(int row, int column) {		//search object 4 the board
@@ -113,18 +101,13 @@ public class GameObjectBoard {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-	public SlayerList getSlayerList() {
-		return slayerList;
+	public GameObjectList getObjectList() {
+		return objectList;
 	}
-	public void setSlayerList(SlayerList slayerList) {
-		this.slayerList = slayerList;
+	public void setObjectList(GameObjectList objectList) {
+		this.objectList = objectList;
 	}
-	public VampireList getVampireList() {
-		return vampireList;
-	}
-	public void setVampireList(VampireList vampireList) {
-		this.vampireList = vampireList;
-	}
+
 	
 	
 }

@@ -1,5 +1,7 @@
 package org.ucm.tp1.Logic.Lists;
 import org.ucm.tp1.Logic.GameObjects.GameObject;
+import org.ucm.tp1.Logic.GameObjects.Vampire;
+import org.ucm.tp1.Logic.GameObjects.Slayer;
 import java.util.*;
 import org.ucm.tp1.Logic.Level;
 
@@ -18,11 +20,39 @@ public class GameObjectList {
 		this.sCounter = 0;
 	}
 
+	public boolean addSlayer(int row, int column){
+		boolean added = false;
+		if(freePos(row, column)) {
+			gameObjects.add(new Slayer(row, column));
+			added = true;
+			sCounter++;
+		}
+		return added;
+	}
+	
+	public void addVampire(double rand, int nRows, int nColumns, double frequency){
+		//calcular si añadirlo o no
+		//calcular en que fila iria
+		//añadirlo		
+		if(rand <= frequency && this.vRemaining > 0) {
+			int row = (int)(Math.round(rand*100) % nRows);
+			if(freePos(row, nColumns)) {
+				gameObjects.add(new Vampire(row, nColumns));
+				this.vRemaining--;
+				this.vAlive++;
+				this.vCounter++;
+			}
+		}
+	}
+	
 	public void removeDead() {
-		for(int i = 0; i < gameObjects.size(); i++ ) {
+		int i = 0;
+		while(i < gameObjects.size()) {
 			if(gameObjects.get(i).getHealth() <= 0) {
 				gameObjects.remove(i);
+				i--;
 			}
+			i++;
 		}
 	}
 	

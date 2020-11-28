@@ -21,7 +21,7 @@ public class GameObjectBoard {
 		return win;
 	}
 	
-	public boolean checkLose() {		//vampire un column -1
+	public boolean checkLose() {		//vampire column -1
 		boolean lose = false;	
 		for(int i = 0; i < objectList.getGameObjects().size(); i++) {
 			if(objectList.getGameObjects().get(i).getColumn() == (-1)) lose = true;
@@ -32,26 +32,6 @@ public class GameObjectBoard {
 	public void update(boolean addCoins){
 		if(addCoins) this.player.setCoins(this.player.getCoins()+10);		//add coins
 		objectList.move();		//move all
-	}
-	
-	public void attack() {
-		//attack slayers
-		int counter;		//number of shots a vampire will recieve
-		for(int j = 0; j < this.vampireList.getCounter(); j++) {
-			counter = 0;
-			for(int x = 0; x < this.vampireList.getVampireList()[j].getColumn(); x++) {		//check number of slayers in a row
-				if(!this.slayerList.checkPos(this.vampireList.getVampireList()[j].getRow(), x)) {
-					counter++;
-				}
-			}
-			this.vampireList.getVampireList()[j].setHealth(this.vampireList.getVampireList()[j].getHealth()-counter);		//recieve shots
-		}
-		//attack vampires
-		for(int i = 0; i < this.slayerList.getCounter(); i++) {
-			if(this.slayerList.getSlayerList()[i].getDeployed() && !this.vampireList.checkPos(this.slayerList.getSlayerList()[i].getRow(), this.slayerList.getSlayerList()[i].getColumn()+1)) {
-				this.slayerList.getSlayerList()[i].setHealth(this.slayerList.getSlayerList()[i].getHealth()-1);		//recieve vampire attack
-			}
-		}
 	}
 	
 	public boolean addSlayer(int row, int column, Game game){

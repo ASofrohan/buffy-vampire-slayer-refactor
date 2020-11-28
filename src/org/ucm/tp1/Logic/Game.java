@@ -1,8 +1,9 @@
 package org.ucm.tp1.Logic;
 import org.ucm.tp1.Logic.GameObjects.IAttack;
+import org.ucm.tp1.view.IPrintable;
 import java.util.*;
 
-public class Game {
+public class Game implements IPrintable {
     private Long seed;
     private Level level;
     private int cycles;
@@ -22,8 +23,8 @@ public class Game {
     
     public void update() {
     	gameObjectBoard.update(randomGenerator(seed) >= 0.5);		//give coins && move
-    	gameObjectBoard.attack();
-    	gameObjectBoard.addVampire(randomGenerator(seed), level.getDim_y()-1, level.getDim_x()-1, level.getVampireFrequency());
+    	gameObjectBoard.getObjectList().attack();
+    	gameObjectBoard.addVampire(randomGenerator(seed), level.getDim_y()-1, level.getDim_x()-1, level.getVampireFrequency(), this);
     	gameObjectBoard.removeDead();
     	cycles++;
     }
@@ -47,6 +48,10 @@ public class Game {
     
     public IAttack getAttackableInPosition(int row, int column) {
     	return gameObjectBoard.getObjectPosition(row, column);
+    }
+    
+    public String getPositionToString(int x, int y) {
+    	return gameObjectBoard.getObjectList().toStringSearch(x,y);
     }
     
     public int getCycles()  {

@@ -31,6 +31,15 @@ public class GameObjectList {
 		return added;
 	}
 	
+	public String toStringSearch(int row, int column) {
+		for(int i = 0; i < gameObjects.size(); i++) {
+			if(gameObjects.get(i).checkPos(row, column)) {
+				return gameObjects.get(i).toString();
+			};
+		}
+		return " ";
+	}
+	
 	public void addVampire(double rand, int nRows, int nColumns, double frequency, Game game){
 		//calcular si añadirlo o no
 		//calcular en que fila iria
@@ -53,6 +62,13 @@ public class GameObjectList {
 				gameObjects.remove(i);
 				i--;
 			}
+			i++;
+		}
+	}
+	
+	public void attack() {
+		for(int i = 0; i < gameObjects.size(); i++) {
+			gameObjects.get(i).attack();
 			i++;
 		}
 	}

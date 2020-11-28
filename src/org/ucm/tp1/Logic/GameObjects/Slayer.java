@@ -19,8 +19,10 @@ public class Slayer extends GameObject{
     }
 
 	public void attack() {
-		IAttack other = game.getAttackableInPosition(this.row, this.column-1);
+		for(int i=row; i < game.getLevel().getDim_x()-1; i++) {
+		IAttack other = game.getAttackableInPosition(this.row, this.column);
 		if(other != null) other.receiveSlayerAttack(this.damage);
+		}
 	}
     
 	public boolean receiveVampireAttack(int damage) {

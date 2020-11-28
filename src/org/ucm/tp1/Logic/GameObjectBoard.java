@@ -75,10 +75,12 @@ public class GameObjectBoard {
 	
 	public IAttack getObjectPosition(int row, int column) {
 		boolean found = false;
-		for(GameObject object: objectList) {
-			if(object.checkPos(row, column)) {
-				return object;
-			}
+		int counter = 0;
+		while(!found && counter < objectList.getGameObjects().size()) {
+			if(objectList.getGameObjects().get(counter).checkPos(row, column)) {
+				return objectList.getGameObjects().get(counter);
+			};
+			counter++;
 		}
 		return null;	
 	}

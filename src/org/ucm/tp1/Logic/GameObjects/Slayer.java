@@ -1,4 +1,5 @@
 package org.ucm.tp1.Logic.GameObjects;
+import org.ucm.tp1.Logic.Game;
 
 public class Slayer extends GameObject{
     private static int cost;
@@ -6,7 +7,8 @@ public class Slayer extends GameObject{
     private int fireRate;
     private int damage;
 
-    public Slayer(int row, int column) {
+    public Slayer(int row, int column, Game game) {
+    	this.game = game;
         this.health = 3;
         this.fireRate = 1;
         this.damage = 1;
@@ -16,6 +18,15 @@ public class Slayer extends GameObject{
     	cost = 50;
     }
 
+	public void attack() {
+		IAttack other = game.getAttackableInPosition(this.row, this.column-1);
+		if(other != null) other.receiveSlayerAttack(this.damage);
+	}
+    
+	public boolean receiveVampireAttack(int damage) {
+		this.health = this.health-damage;
+		return true;
+	}
     /* TODO When new types of damage are added, such as area or diagonal,
      * create an enum with the different types. */
     

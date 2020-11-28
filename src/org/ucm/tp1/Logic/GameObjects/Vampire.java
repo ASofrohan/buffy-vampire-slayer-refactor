@@ -1,4 +1,6 @@
 package org.ucm.tp1.Logic.GameObjects;
+import org.ucm.tp1.Logic.Game;
+
 
 public class Vampire extends GameObject{
 	private int health;
@@ -6,14 +8,25 @@ public class Vampire extends GameObject{
 	private int damage;
 	private boolean move;		//indica si le toca moverse ese turno o no
 	
-	public Vampire(int row, int column){
+	public Vampire(int row, int column, Game game){
+		this.game = game;
 		this.health = 3;
         this.fireRate = 1;
         this.damage = 1;
         this.move = false;		//it changes each turn
         deploy(row, column);	
 	}
-
+	
+	public void attack() {
+		IAttack other = game.getAttackableInPosition(this.row, this.column-1);
+		if(other != null) other.receiveVampireAttack(this.damage);
+	}
+	
+	public boolean receiveSlayerAttack(int damage) {
+		this.health = this.health-damage;
+		return true;
+	}
+	
 	public boolean move() {
 		if(this.move) {
 			this.column--;

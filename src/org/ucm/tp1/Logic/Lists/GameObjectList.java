@@ -4,6 +4,7 @@ import org.ucm.tp1.Logic.GameObjects.Vampire;
 import org.ucm.tp1.Logic.GameObjects.Slayer;
 import java.util.*;
 import org.ucm.tp1.Logic.Level;
+import org.ucm.tp1.Logic.Game;
 
 public class GameObjectList {
 	private ArrayList<GameObject>gameObjects;
@@ -20,24 +21,24 @@ public class GameObjectList {
 		this.sCounter = 0;
 	}
 
-	public boolean addSlayer(int row, int column){
+	public boolean addSlayer(int row, int column, Game game){
 		boolean added = false;
 		if(freePos(row, column)) {
-			gameObjects.add(new Slayer(row, column));
+			gameObjects.add(new Slayer(row, column, game));
 			added = true;
 			sCounter++;
 		}
 		return added;
 	}
 	
-	public void addVampire(double rand, int nRows, int nColumns, double frequency){
+	public void addVampire(double rand, int nRows, int nColumns, double frequency, Game game){
 		//calcular si añadirlo o no
 		//calcular en que fila iria
 		//añadirlo		
 		if(rand <= frequency && this.vRemaining > 0) {
 			int row = (int)(Math.round(rand*100) % nRows);
 			if(freePos(row, nColumns)) {
-				gameObjects.add(new Vampire(row, nColumns));
+				gameObjects.add(new Vampire(row, nColumns, game));
 				this.vRemaining--;
 				this.vAlive++;
 				this.vCounter++;

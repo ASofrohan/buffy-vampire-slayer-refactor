@@ -1,5 +1,5 @@
 package org.ucm.tp1.Logic;
-
+import org.ucm.tp1.Logic.GameObjects.IAttack;
 import java.util.*;
 
 public class Game {
@@ -43,6 +43,10 @@ public class Game {
     	this.seed = (long)generator.nextInt();
     	generator.setSeed(seed);
     	return generator.nextDouble();
+    }
+    
+    public IAttack getAttackableInPosition(int row, int column) {
+    	return gameObjectBoard.getObjectPosition(row, column);
     }
     
     public int getCycles()  {

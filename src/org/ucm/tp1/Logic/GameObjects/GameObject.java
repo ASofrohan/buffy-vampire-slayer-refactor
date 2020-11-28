@@ -1,9 +1,11 @@
 package org.ucm.tp1.Logic.GameObjects;
+import org.ucm.tp1.Logic.Game;
 
-public abstract class GameObject {
+public abstract class GameObject implements IAttack{
 	
 	protected int column;
 	protected int row;
+	protected Game game;
 	
 	public abstract int getHealth();
 	public abstract boolean move();

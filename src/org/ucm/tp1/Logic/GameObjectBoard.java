@@ -1,6 +1,8 @@
 package org.ucm.tp1.Logic;
 import org.ucm.tp1.Logic.Lists.GameObjectList;
 import org.ucm.tp1.Logic.GameObjects.Player;
+import org.ucm.tp1.Logic.GameObjects.GameObject;
+import org.ucm.tp1.Logic.GameObjects.IAttack;
 
 public class GameObjectBoard {
 	
@@ -19,7 +21,7 @@ public class GameObjectBoard {
 		return win;
 	}
 	
-	public boolean checkLose() {		//vampire about to move and on the first column
+	public boolean checkLose() {		//vampire un column -1
 		boolean lose = false;	
 		for(int i = 0; i < objectList.getGameObjects().size(); i++) {
 			if(objectList.getGameObjects().get(i).getColumn() == (-1)) lose = true;
@@ -52,23 +54,33 @@ public class GameObjectBoard {
 		}
 	}
 	
-	public boolean addSlayer(int row, int column){
+	public boolean addSlayer(int row, int column, Game game){
 		row--;
 		column--;
 		boolean added = false;
 		if(this.player.getCoins() >= 50) {
-			added = objectList.addSlayer(row, column);
+			added = objectList.addSlayer(row, column, game);
 			if(added) this.getPlayer().setCoins(this.getPlayer().getCoins()-50);		//update coins
 		}
 		return added;
 	}
 	
-	public void addVampire(double rand, int nRows, int nColumns, double frequency){
-		objectList.addVampire(rand, nRows, nColumns, frequency);
+	public void addVampire(double rand, int nRows, int nColumns, double frequency, Game game){
+		objectList.addVampire(rand, nRows, nColumns, frequency, game);
 	}
 	
 	public void removeDead(){
 		objectList.removeDead();
+	}
+	
+	public IAttack getObjectPosition(int row, int column) {
+		boolean found = false;
+		for(GameObject object: objectList) {
+			if(object.checkPos(row, column)) {
+				return object;
+			}
+		}
+		return null;	
 	}
 	
 	String searchPos(int row, int column) {		//search object 4 the board

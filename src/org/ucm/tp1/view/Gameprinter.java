@@ -12,19 +12,19 @@ public class Gameprinter {
     public Gameprinter (Game game, int rows, int cols) {
         this.numCols = cols;
     	this.numRows = rows;
-        encodeGame(game);
+        //encodeGame(game);
     }
     
-    private void encodeGame(Game game) {		//generate & fill board
+    /*private void encodeGame(Game game) {		//generate & fill board
 		board = new String[numRows][numCols];
         for(int i = 0; i < numRows; i++) {
             for(int j = 0; j < numCols; j++) {
             	board[i][j] =  game.toStringObjectAt(i, j);		//search object in that pos
             }
         }
-    }
+    }*/
     
-     public String toString() {
+     public String toString(Game game) {
 
          int cellSize = 7;
          int marginSize = 2;
@@ -51,7 +51,7 @@ public class Gameprinter {
          for(int i=0; i<numRows; i++) {
                 str.append(margin).append(vDelimiter);
                 for (int j=0; j<numCols; j++)
-                    str.append( MyStringUtils.centre(board[i][j], cellSize)).append(vDelimiter);
+                    str.append( MyStringUtils.centre(game.getPositionToString(i, j), cellSize)).append(vDelimiter);
                 if (i != numRows - 1) str.append(lineDelimiter);
                 else str.append(lineEdge);   
          }

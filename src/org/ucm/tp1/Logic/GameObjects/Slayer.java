@@ -39,8 +39,7 @@ public class Slayer extends GameObject{
     public String toString() {
     	return "S[" + this.health + "]";
     }
-    
-    public static int getCost() {
+	public static int getCost() {
         return cost;
     }
     public static void setCost(int newCost) {

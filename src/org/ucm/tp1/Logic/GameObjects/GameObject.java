@@ -6,7 +6,7 @@ public abstract class GameObject implements IAttack{
 	protected int column;
 	protected int row;
 	protected Game game;
-	
+	protected static int vAlive;
 	public abstract int getHealth();
 	public abstract boolean move();
 	public abstract String toString();
@@ -16,6 +16,10 @@ public abstract class GameObject implements IAttack{
 		this.column = column;
 	};
 	
+    static {
+    	vAlive = 0;
+    }
+
     public boolean checkPos(int row, int column) {
     	boolean match = false;
     	if(row == this.row && column == this.column) {
@@ -39,4 +43,11 @@ public abstract class GameObject implements IAttack{
 	public void moveForward() {
 		this.column--;
 	}
+	public static int getvAlive() {
+		return vAlive;
+	}
+	public static void setvAlive(int vAlive) {
+		GameObject.vAlive = vAlive;
+	}
+	
 };

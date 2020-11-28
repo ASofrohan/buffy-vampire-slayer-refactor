@@ -65,30 +65,6 @@ public class GameObjectBoard {
 		return null;	
 	}
 	
-	String searchPos(int row, int column) {		//search object 4 the board
-		String object = " ";
-		boolean found = false;
-		
-		//search vampire		
-		for (int j = 0; j < this.vampireList.getCounter(); j++) {
-			if (this.vampireList.getVampireList()[j].getRow()== row && this.vampireList.getVampireList()[j].getColumn() == column && this.vampireList.getVampireList()[j].getDeployed()) {
-				found = true;
-				object = "V[" + this.vampireList.getVampireList()[j].getHealth() + "]";
-			}
-		}
-		
-		//search slayer
-		if(!found)
-			for (int k = 0; k < this.slayerList.getCounter(); k++) {
-				if (this.slayerList.getSlayerList()[k].getRow() == row && this.slayerList.getSlayerList()[k].getColumn() == column && this.slayerList.getSlayerList()[k].getDeployed()) {
-					found = true;
-					object = "S[" + this.slayerList.getSlayerList()[k].getHealth() + "]";
-				}
-			}
-		
-		return object;
-	}
-	
 	public Player getPlayer() {
 		return player;
 	}

@@ -54,6 +54,10 @@ public class Game implements IPrintable {
     	return gameObjectBoard.getObjectList().toStringSearch(x,y);
     }
     
+    public String getInfo() {
+    	return " ";
+    }
+    
     public int getCycles()  {
         return cycles;
     }

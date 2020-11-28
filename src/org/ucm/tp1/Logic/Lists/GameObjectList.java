@@ -49,8 +49,8 @@ public class GameObjectList {
 			if(freePos(row, nColumns)) {
 				gameObjects.add(new Vampire(row, nColumns, game));
 				this.vRemaining--;
-				this.vAlive++;
 				this.vCounter++;
+				this.vAlive = gameObjects.get(vCounter).getvAlive();
 			}
 		}
 	}

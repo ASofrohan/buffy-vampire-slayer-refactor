@@ -14,7 +14,8 @@ public class Vampire extends GameObject{
         this.fireRate = 1;
         this.damage = 1;
         this.move = false;		//it changes each turn
-        deploy(row, column);	
+        deploy(row, column);
+        setvAlive(getvAlive()+1);
 	}
 	
 	public void attack() {
@@ -24,6 +25,7 @@ public class Vampire extends GameObject{
 	
 	public boolean receiveSlayerAttack(int damage) {
 		this.health = this.health-damage;
+		if(this.health <= 0) setvAlive(getvAlive()-1);;
 		return true;
 	}
 	
@@ -34,7 +36,7 @@ public class Vampire extends GameObject{
 		this.move = !this.move;
 		return !this.move;
     }
-	
+
     public String toString() {
     	return "V[" + this.health + "]";
     }

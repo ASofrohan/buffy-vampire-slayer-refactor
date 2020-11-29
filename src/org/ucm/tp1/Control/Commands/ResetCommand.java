@@ -3,6 +3,7 @@ package org.ucm.tp1.Control.Commands;
 import java.util.Scanner;
 import org.ucm.tp1.Logic.Level;
 import org.ucm.tp1.Logic.Game;
+import org.ucm.tp1.Logic.GameObjectBoard;
 
 public class ResetCommand extends Command {
 	
@@ -18,7 +19,6 @@ public class ResetCommand extends Command {
             "[n]one | []: update%n");
 	public static final String confirmationMsg = String.format("Are you sure? (y/n)");
 	public static final String unknownCommandMsg = String.format("Unknown command.");
-	private Scanner scanner;
 	
 	public ResetCommand() {
 		super("reset", "r", "details", "help");
@@ -26,11 +26,16 @@ public class ResetCommand extends Command {
 
 	@Override
 	public boolean execute(Game game) {
-		// TODO Auto-generated method stub
+		// Java no permite pasar objetos por referencia
 		if (confirm()) {
-			game = new Game(game.getSeedBackup(), game.getLevelBackup());
+			game.setSeed(game.getSeedBackup());
+			game.setCycles(0);
+			game.setGameObjectBoard(new GameObjectBoard(game.getLevel()));
+			game.setExitGame(false);
+			game.setWin(false);
+			
         }
-		return false;
+		return true;
 	}
 
 	@Override
@@ -41,6 +46,7 @@ public class ResetCommand extends Command {
 	 public boolean confirm() {
 		 boolean unknown = false;
 	     boolean ret = false;
+	     Scanner scanner = new Scanner(System.in);
 		 do {
 	        System.out.print(confirmationMsg);
 	        System.out.print("\n" + "Command > ");
@@ -49,8 +55,7 @@ public class ResetCommand extends Command {
 	            ret = true;
 	            unknown = false;
 	        }
-	        else if (!input.equalsIgnoreCase("n") && !input.equalsIgnoreCase("no")) {
-	            unknownCommand();
+	        else if (!input.equalsIgnoreCase("n") || !input.equalsIgnoreCase("no")) {
 	            ret = false;
 	            unknown = false;
 	        }

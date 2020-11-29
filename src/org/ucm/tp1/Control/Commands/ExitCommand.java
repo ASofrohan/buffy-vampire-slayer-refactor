@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
             "[n]one | []: update%n");
 	public static final String confirmationMsg = String.format("Are you sure? (y/n)");
 	public static final String unknownCommandMsg = String.format("Unknown command.");
-    private Scanner scanner;
+    //private Scanner scanner;
     
 	public ExitCommand() {
 		super("exit", "e", "details", "help");
@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
 		if(confirm()) {
 			game.setExitGame(true);
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -35,6 +35,7 @@ public class ExitCommand extends Command {
 	 public boolean confirm() {
 		 boolean unknown = false;
 	     boolean ret = false;
+	     Scanner scanner = new Scanner(System.in);
 		 do {
 	        System.out.print(confirmationMsg);
 	        System.out.print("\n" + "Command > ");
@@ -43,8 +44,7 @@ public class ExitCommand extends Command {
 	            ret = true;
 	            unknown = false;
 	        }
-	        else if (!input.equalsIgnoreCase("n") && !input.equalsIgnoreCase("no")) {
-	            unknownCommand();
+	        else if (!input.equalsIgnoreCase("n") || !input.equalsIgnoreCase("no")) {
 	            ret = false;
 	            unknown = false;
 	        }

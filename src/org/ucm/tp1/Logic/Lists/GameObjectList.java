@@ -69,7 +69,6 @@ public class GameObjectList {
 	public void attack() {
 		for(int i = 0; i < gameObjects.size(); i++) {
 			gameObjects.get(i).attack();
-			i++;
 		}
 	}
 	

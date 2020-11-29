@@ -20,14 +20,13 @@ public class Game implements IPrintable {
         this.cycles = 0;
         this.gameObjectBoard = new GameObjectBoard(level);
         this.exitGame = false;
-        this.win = false;
         this.seedBackup = seed;
         this.levelBackup = level;
     }
     
     public void update() {
-    	gameObjectBoard.update(randomGenerator(seed) >= 0.5);		//give coins && move
     	gameObjectBoard.getObjectList().attack();
+    	gameObjectBoard.update(randomGenerator(seed) >= 0.5);		//give coins && move
     	gameObjectBoard.addVampire(randomGenerator(seed), level.getDim_y()-1, level.getDim_x()-1, level.getVampireFrequency(), this);
     	gameObjectBoard.removeDead();
     	cycles++;
@@ -35,7 +34,6 @@ public class Game implements IPrintable {
     
     public boolean isFinished() {
     	if(!this.exitGame) this.exitGame = (gameObjectBoard.checkWin() || gameObjectBoard.checkLose());
-    	this.win = gameObjectBoard.checkWin();
     	return this.exitGame;
     }
     
@@ -56,10 +54,10 @@ public class Game implements IPrintable {
     
     public String getInfo() {
 
-    	String info = "Number of cycles: " + this.cycles + "%n";
-    	info = info + "Coins: " + gameObjectBoard.getPlayer().getCoins() + "%n";
-    	info = info + "Remaining vampires: " + gameObjectBoard.getObjectList().getvRemaining() + "%n";
-    	info = info + "Vampires on the board: " + gameObjectBoard.getObjectList().getvAlive() + "%n";
+    	String info = "Number of cycles: " + this.cycles + "\n";
+    	info = info + "Coins: " + gameObjectBoard.getPlayer().getCoins() + "\n";
+    	info = info + "Remaining vampires: " + gameObjectBoard.getObjectList().getvRemaining() + "\n";
+    	info = info + "Vampires on the board: " + gameObjectBoard.getObjectList().getvAlive() + "\n";
     	
     	return info;
     }

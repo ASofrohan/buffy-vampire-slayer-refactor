@@ -35,25 +35,26 @@ public class Controller {
     
     public void  printGame() {		//info messages & board
         this.gameprinter = new Gameprinter(game, game.getLevel().getDim_y(), game.getLevel().getDim_x());
-        System.out.println(gameprinter);
+        System.out.println(gameprinter.toString(this.game));
     }
     
     public void run() {
     	while (!game.isFinished()){
-	    		if (refreshDisplay) printGame();
-	    		refreshDisplay = false;
-	    		System.out.println(prompt);
-	    		String s = scanner.nextLine();
-	    		String[] parameters = s.toLowerCase().trim().split(" ");
-	    		System.out.println("[DEBUG] Executing: " + s);
-	    		Command command = CommandGenerator.parseCommand(parameters);
-	    		if (command != null) {
-	    			refreshDisplay = command.execute(game);
-	    		}
-	    		else {
-	    			System.out.println("[ERROR]: " + unknownCommandMsg);
-	    		}
+    		if (refreshDisplay) printGame();
+    		refreshDisplay = false;
+    		System.out.println(prompt);
+    		String s = scanner.nextLine();
+    		String[] parameters = s.toLowerCase().trim().split(" ");
+    		System.out.println("[DEBUG] Executing: " + s);
+    		Command command = CommandGenerator.parseCommand(parameters);
+    		if (command != null) {
+    			refreshDisplay = command.execute(game);
     		}
+    		else {
+    			System.out.println("[ERROR]: " + unknownCommandMsg);
+    		}
+    	}
+    	System.out.println("Game over.");
     	
     }    
 }

@@ -17,15 +17,22 @@ public class GameObjectBoard {
 	
 	public boolean checkWin() {
 		boolean win = false;	
-		if(objectList.getvRemaining() == 0 && objectList.getvAlive() == 0) win = true;	//no v left on the board and remaining
+		if(objectList.getvRemaining() == 0 && objectList.getvAlive() == 0) {
+			win = true;	//no v left on the board and remaining
+			System.out.println("You won the game!!!");
+		}
 		return win;
 	}
 	
 	public boolean checkLose() {		//vampire column -1
 		boolean lose = false;	
 		for(int i = 0; i < objectList.getGameObjects().size(); i++) {
-			if(objectList.getGameObjects().get(i).getColumn() == (-1)) lose = true;
-		}	
+			if(objectList.getGameObjects().get(i).getColumn() == (-1)) {
+				lose = true;
+				System.out.println("You lost the game!!!");
+				break;
+			}
+		}
 		return lose;
 	}
 	

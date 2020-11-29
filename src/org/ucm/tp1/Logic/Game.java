@@ -10,6 +10,8 @@ public class Game implements IPrintable {
     private GameObjectBoard gameObjectBoard;
     private boolean exitGame;
     private boolean win;
+    private long seedBackup;		//reset
+    private Level levelBackup;		//reset
     
     
     public Game(long seed, Level level) {
@@ -19,6 +21,8 @@ public class Game implements IPrintable {
         this.gameObjectBoard = new GameObjectBoard(level);
         this.exitGame = false;
         this.win = false;
+        this.seedBackup = seed;
+        this.levelBackup = level;
     }
     
     public void update() {
@@ -30,7 +34,7 @@ public class Game implements IPrintable {
     }
     
     public boolean isFinished() {
-    	this.exitGame = (gameObjectBoard.checkWin() || gameObjectBoard.checkLose());
+    	if(!this.exitGame) this.exitGame = (gameObjectBoard.checkWin() || gameObjectBoard.checkLose());
     	this.win = gameObjectBoard.checkWin();
     	return this.exitGame;
     }
@@ -67,6 +71,22 @@ public class Game implements IPrintable {
     public void setCycles(int nCycles) {
         this.cycles = nCycles;
     }
+
+	public long getSeedBackup() {
+		return seedBackup;
+	}
+
+	public void setSeedBackup(long seedBackup) {
+		this.seedBackup = seedBackup;
+	}
+
+	public Level getLevelBackup() {
+		return levelBackup;
+	}
+
+	public void setLevelBackup(Level levelBackup) {
+		this.levelBackup = levelBackup;
+	}
 
 	public Level getLevel() {
         return level;

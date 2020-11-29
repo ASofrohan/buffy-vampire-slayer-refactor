@@ -35,10 +35,6 @@ public class Game implements IPrintable {
     	return this.exitGame;
     }
     
-    public String toStringObjectAt(int row, int column) {
-    	return this.gameObjectBoard.searchPos(row, column);
-    }
-    
     public double randomGenerator(Long seed) {		//generator
     	Random generator = new Random(seed);
     	this.seed = (long)generator.nextInt();
@@ -55,7 +51,13 @@ public class Game implements IPrintable {
     }
     
     public String getInfo() {
-    	return " ";
+
+    	String info = "Number of cycles: " + this.cycles + "%n";
+    	info = info + "Coins: " + gameObjectBoard.getPlayer().getCoins() + "%n";
+    	info = info + "Remaining vampires: " + gameObjectBoard.getObjectList().getvRemaining() + "%n";
+    	info = info + "Vampires on the board: " + gameObjectBoard.getObjectList().getvAlive() + "%n";
+    	
+    	return info;
     }
     
     public int getCycles()  {

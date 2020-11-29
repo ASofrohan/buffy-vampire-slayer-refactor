@@ -50,7 +50,7 @@ public class GameObjectList {
 				gameObjects.add(new Vampire(row, nColumns, game));
 				this.vRemaining--;
 				this.vCounter++;
-				this.vAlive = gameObjects.get(vCounter).getvAlive();
+				this.vAlive = getvAlive();
 			}
 		}
 	}

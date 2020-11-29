@@ -28,7 +28,7 @@ public class Controller {
     private long seedBackup;		//reset
     private Level levelBackup;		//reset
     private boolean help;			//no avanzar un ciclo
-    private boolean refreshDisplay; //¿Se refresca la pantalla?
+    private boolean refreshDisplay;
     
     public Controller(Game game, Scanner scanner) {
         this.game = game;
@@ -40,18 +40,14 @@ public class Controller {
     }
     
     public void  printGame() {		//info messages & board
-        System.out.println("Number of cycles: " + game.getCycles());
-        System.out.println("Coins: " + game.getGameObjectBoard().getPlayer().getCoins());
-        System.out.println("Remaining vampires: " + game.getGameObjectBoard().getVampireList().getvRemaining());
-        System.out.println("Vampires on the board: " + game.getGameObjectBoard().getVampireList().getvAlive());
         this.gameprinter = new Gameprinter(game, game.getLevel().getDim_y(), game.getLevel().getDim_x());
         System.out.println(gameprinter);
     }
     
     public void run() {
-    	/*
-        String command = "";
-        
+    	
+        /*String command = "";
+
         while(!exitGame) {
         	do {
             printGame();		//print game
@@ -78,7 +74,7 @@ public class Controller {
 	    		if (refreshDisplay) printGame();
 	    		refreshDisplay = false;
 	    		System.out.println(prompt);
-	    		String s = scanner.nextLine(); //¿Al estar declarando un string cada ciclo no vas gastando más y más memoria?
+	    		String s = scanner.nextLine();
 	    		String[] parameters = s.toLowerCase().trim().split(" ");
 	    		System.out.println("[DEBUG] Executing: " + s);
 	    		Command command = CommandGenerator.parseCommand(parameters);
@@ -220,4 +216,5 @@ public class Controller {
         }
         return validCommand;
     }
+    
 }

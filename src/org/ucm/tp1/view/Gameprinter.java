@@ -6,12 +6,14 @@ public class Gameprinter {
     
     int numCols; 
     int numRows;
-    String[][] board;
+    IPrintable printable;
+    //String[][] board;
     final String space = " ";
     
-    public Gameprinter (Game game, int rows, int cols) {
+    public Gameprinter (IPrintable printable, int rows, int cols) {
         this.numCols = cols;
     	this.numRows = rows;
+    	this.printable = printable;
         //encodeGame(game);
     }
     
@@ -25,7 +27,6 @@ public class Gameprinter {
     }*/
     
      public String toString(Game game) {
-
          int cellSize = 7;
          int marginSize = 2;
          String vDelimiter = "|";
@@ -46,12 +47,12 @@ public class Gameprinter {
 
 
          StringBuilder str = new StringBuilder();
-
+         str.append(printable.getInfo());
          str.append(lineEdge);
          for(int i=0; i<numRows; i++) {
                 str.append(margin).append(vDelimiter);
                 for (int j=0; j<numCols; j++)
-                    str.append( MyStringUtils.centre(game.getPositionToString(i, j), cellSize)).append(vDelimiter);
+                    str.append( MyStringUtils.centre(printable.getPositionToString(i, j), cellSize)).append(vDelimiter);
                 if (i != numRows - 1) str.append(lineDelimiter);
                 else str.append(lineEdge);   
          }
